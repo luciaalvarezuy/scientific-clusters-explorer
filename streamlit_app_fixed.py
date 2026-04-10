@@ -5,14 +5,6 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 
-
-st.title("Explorador interactivo de clusters científicos")
-st.write(
-    "Aplicación para explorar clusters temáticos obtenidos a partir de abstracts "
-    "científicos usando PySpark, TF-IDF y KMeans."
-)
-
-
 def find_file(filename: str) -> Path:
     """Search common locations for exported CSV files."""
     candidates = [
@@ -137,8 +129,8 @@ def main():
     
     selected_journal = "Todos"
     if "journal" in docs.columns:
-    journal_options = ["Todos"] + sorted(docs["journal"].dropna().unique().tolist())
-    selected_journal = st.sidebar.selectbox("Filtrar por journal", journal_options)
+        journal_options = ["Todos"] + sorted(docs["journal"].dropna().unique().tolist())
+        selected_journal = st.sidebar.selectbox("Filtrar por journal", journal_options)
 
     cluster_docs = docs[docs["cluster"] == selected_cluster].copy()
 
@@ -169,11 +161,11 @@ def main():
             st.metric("Longitud promedio del abstract", "N/D")
 
     with col3:
-    if not cluster_words.empty:
-        top_signal = ", ".join(cluster_words["word"].head(5).tolist())
-        st.metric("Señal temática", top_signal)
-    else:
-        st.metric("Señal temática", "N/D")
+        if not cluster_words.empty:
+            top_signal = ", ".join(cluster_words["word"].head(5).tolist())
+            st.metric("Señal temática", top_signal)
+        else:
+            st.metric("Señal temática", "N/D")
 
     tab1, tab2, tab3, tab4 = st.tabs([
         "Señales léxicas",
