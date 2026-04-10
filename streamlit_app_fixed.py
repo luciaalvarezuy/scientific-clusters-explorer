@@ -221,26 +221,59 @@ def main():
 
     st.title("Scientific Clusters Explorer")
     st.write(
-        "Interactive NLP application to explore thematic clusters of scientific abstracts "
-        "and classify new text in real time."
+        "Interactive NLP application for exploring thematic clusters of scientific abstracts "
+        "and classifying new input text in real time. The app combines unsupervised topic discovery "
+        "(KMeans over TF-IDF features) with a lightweight supervised classifier trained on cluster labels "
+        "to support live inference."
     )
 
     with st.expander("Methodology"):
         st.write("""
-        Documents were preprocessed and represented using TF-IDF.
-        KMeans was used to identify thematic clusters.
-        A lightweight supervised classifier was then trained on cluster assignments
-        to enable real-time prediction for new input text.
+        This application combines two complementary NLP workflows:
+    
+        **1. Cluster exploration**
+        - Scientific abstracts were preprocessed and represented using TF-IDF
+        - KMeans was applied to identify thematic clusters
+        - Each cluster is described using its most frequent terms and representative documents
+    
+        **2. Live text classification**
+        - A lightweight supervised classifier was trained using the existing cluster assignments as pseudo-labels
+        - When a user pastes a new abstract, the app vectorizes the text with the saved TF-IDF model
+        - The classifier then predicts the most likely topic/cluster and returns a confidence score when available
+    
+        **Language note**
+        - The classifier was trained on scientific abstracts written mainly in English
+        - It works best with English abstracts
+        - Results for Spanish or other languages may be less reliable
         """)
 
     st.markdown("---")
-    st.markdown("## 🧠 Live Text Classifier")
+    st.markdown("## Live Text Classifier")
 
+    st.markdown(
+    """
+    Paste a scientific abstract or short research text and the model will predict the most likely topic.
+
+    **How it works**
+    - the input text is transformed using the saved TF-IDF vectorizer
+    - a supervised classifier predicts the most likely cluster/topic
+    - the app returns the predicted topic, the cluster ID, and confidence when available
+
+    **Important**
+    - the classifier was trained mainly on English scientific abstracts
+    - performance is expected to be best for English input
+    - predictions for Spanish or other languages may be less reliable
+    """
+)
     if classifier_ready:
+        st.info(
+            "For best performance, use English scientific abstracts. "
+            "The model was trained mainly on English-language text."
+        )
         user_input = st.text_area(
             "Paste an abstract or short scientific text",
             height=180,
-            placeholder="Example: Patients with COVID-19 were analyzed to evaluate risk factors, outcomes, and public health implications..."
+           placeholder="Example (recommended in English): Patients with COVID-19 were analyzed to evaluate risk factors, outcomes, and public health implications..."
         )
 
         if st.button("Predict topic"):
@@ -260,6 +293,8 @@ def main():
 
                 with col_a:
                     st.success(f"Predicted topic: {pred_label}")
+                    st.caption(
+                        "This prediction is based on a classifier trained on cluster assignments derived from English scientific abstracts.")
                     st.write(f"Predicted cluster: {pred_cluster}")
 
                 with col_b:
@@ -288,9 +323,11 @@ def main():
                 st.warning("Please paste some text before predicting.")
     else:
         st.info(
-            "Classifier not available yet. Add these files to your project:\n"
+            "The live classifier is not available yet because the serialized model files were not found.\n\n"
+            "To enable live inference, add these files to the project:\n"
             "- tfidf_vectorizer.joblib\n"
-            "- cluster_classifier.joblib"
+            "- cluster_classifier.joblib\n\n"
+            "Once added, the app will allow users to paste a new abstract and receive a predicted topic in real time."
         )
 
     st.markdown("---")
