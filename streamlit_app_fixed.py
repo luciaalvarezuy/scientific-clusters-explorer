@@ -136,7 +136,7 @@ def main():
     journal_options = ["Todos"]
     if "journal" in docs.columns:
         journal_counts = docs["journal"].value_counts()
-        valid_journals = journal_counts[journal_counts > 3].index.tolist()
+        valid_journals = journal_counts[journal_counts > 1].index.tolist()
         journal_options = ["Todos"] + sorted(valid_journals)
         
     with st.sidebar.form("filtros_form"):
