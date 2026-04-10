@@ -131,16 +131,18 @@ def main():
         """)
 
     st.sidebar.header("Filtros")
-    clusters = sorted(docs["cluster"].dropna().unique().tolist())
-    selected_cluster = st.sidebar.selectbox("Seleccionar cluster", clusters)
-    n_examples = st.sidebar.slider("Cantidad de ejemplos", 3, 15, 5)
-    search_term = st.sidebar.text_input("Buscar palabra en abstracts")
     
-    selected_journal = "Todos"
+    clusters = sorted(docs["cluster"].dropna().unique().tolist())
+    journal_options = ["Todos"]
     if "journal" in docs.columns:
         journal_options = ["Todos"] + sorted(docs["journal"].dropna().unique().tolist())
-        selected_journal = st.sidebar.selectbox("Filtrar por journal", journal_options)
-
+    
+    with st.sidebar.form("filtros_form"):
+        selected_cluster = st.selectbox("Seleccionar cluster", clusters)
+        n_examples = st.slider("Cantidad de ejemplos", 3, 15, 5)
+        search_term = st.text_input("Buscar palabra en abstracts")
+        selected_journal = st.selectbox("Filtrar por journal", journal_options)
+        aplicar = st.form_submit_button("Aplicar filtros")
     cluster_docs = docs[docs["cluster"] == selected_cluster].copy()
 
     if search_term:
