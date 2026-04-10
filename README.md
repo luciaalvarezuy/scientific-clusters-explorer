@@ -1,10 +1,10 @@
-# 🧠 Scientific Clusters Explorer (NLP + Streamlit)
+# Scientific Clusters Explorer (NLP + Streamlit)
 
-👉 **Live App:** https://app-jsj8yakkavjbmwk9q539ye.streamlit.app/
+**Live App:** https://app-jsj8yakkavjbmwk9q539ye.streamlit.app/
 
 ---
 
-## 🚀 Overview
+## Overview
 
 This project is an **interactive NLP application** built with Streamlit that allows users to explore thematic clusters of scientific articles based on their abstracts.
 
@@ -12,7 +12,7 @@ It combines **text mining, clustering, and interactive visualization** to transf
 
 ---
 
-## 🎯 Objective
+## Objective
 
 The goal of this project is to demonstrate how to:
 
@@ -23,7 +23,7 @@ The goal of this project is to demonstrate how to:
 
 ---
 
-## 🧠 Methodology
+## Methodology
 
 The pipeline follows these steps:
 
@@ -43,7 +43,7 @@ The pipeline follows these steps:
 
 ---
 
-## 📊 App Features
+## App Features
 
 The Streamlit app allows users to:
 
@@ -56,7 +56,7 @@ The Streamlit app allows users to:
 
 ---
 
-## 🧹 Data Quality Handling
+## Data Quality Handling
 
 During development, inconsistencies were detected in the `journal` field, where some entries contained fragments of abstracts instead of actual journal names.
 
@@ -68,7 +68,7 @@ This highlights real-world data challenges and practical cleaning strategies.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Python**
 - **Pandas**
@@ -78,7 +78,7 @@ This highlights real-world data challenges and practical cleaning strategies.
 
 ---
 
-## ▶️ Run Locally
+## Run Locally
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/Streamlit.git
