@@ -115,7 +115,7 @@ def main():
     words = build_cluster_top_words(docs)
     yearly_counts = build_yearly_counts(docs)
 
-    st.title("🧠 Explorador interactivo de clusters científicos")
+    st.title("Explorador interactivo de clusters científicos")
     st.write(
         "Aplicación para explorar clusters temáticos obtenidos a partir de abstracts "
         "científicos usando PySpark, TF-IDF y KMeans."
