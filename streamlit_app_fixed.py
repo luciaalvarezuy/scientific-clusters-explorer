@@ -367,6 +367,20 @@ def main():
         )
         selected_cluster = cluster_option_map[selected_cluster_label]
 
+        st.info("""
+        **Cluster distribution note**
+        
+        The clustering results show an imbalanced distribution of records across clusters:
+        
+        - **Cluster 0:** 860 records
+        - **Cluster 1:** 130 records
+        - **Cluster 2:** 2 records
+        - **Cluster 3:** 7 records
+        - **Cluster 4:** 1 record
+        
+        Some clusters contain a very small number of records. In future iterations, it will be important to review this distribution carefully, evaluate whether these small clusters represent meaningful niche topics or clustering artifacts, and improve the clustering strategy over time.
+        """)
+
         n_examples = st.slider("Number of representative documents", 3, 15, 5)
         search_term = st.text_input("Search keyword in abstracts")
         selected_journal = st.selectbox("Filter by journal", journal_options)
