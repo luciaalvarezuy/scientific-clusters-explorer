@@ -527,5 +527,21 @@ def main():
     Some clusters contain a very small number of records. In future iterations, it will be important to review this distribution carefully, evaluate whether these small clusters represent meaningful niche topics or clustering artifacts, and improve the clustering strategy over time.
     """)
 
+    st.markdown(
+    """
+    <div style='text-align: center; margin-top: 35px; padding-top: 20px; border-top: 1px solid #444;'>
+        <p style='font-size: 0.95rem; color: #BBBBBB; margin-bottom: 4px;'>
+            Developed by
+        </p>
+        <p style='font-size: 1.1rem; font-weight: 600; margin-bottom: 2px;'>
+            PhD. Lucía Alvarez-Nuñez
+        </p>
+        <p style='font-size: 0.9rem; color: #BBBBBB;'>
+            2026
+        </p>
+    </div>
+    """,
+    unsafe_allow_html=True)
+
 if __name__ == "__main__":
     main()
