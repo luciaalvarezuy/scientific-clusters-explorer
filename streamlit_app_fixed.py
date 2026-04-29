@@ -7,6 +7,13 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 
+MANUAL_CLUSTER_LABELS = {
+    0: "COVID-19 Clinical and Biomedical Research",
+    1: "Hospital Care and COVID-19 Risk Factors",
+    2: "Respiratory Complications and Health Systems",
+    3: "Social, Behavioral and Food-related Impacts",
+    4: "Genomic and Computational Virology"
+}
 
 st.set_page_config(page_title="Scientific Clusters Explorer", layout="wide")
 
@@ -106,7 +113,9 @@ def build_cluster_labels(words: pd.DataFrame) -> pd.DataFrame:
 
         top_text = ", ".join(cluster_words[:4])
 
-        if any(w in cluster_words for w in ["vaccine", "vaccination", "immune", "antibody"]):
+        if cluster_id in MANUAL_CLUSTER_LABELS:
+            label = MANUAL_CLUSTER_LABELS[cluster_id]
+        elif any(w in cluster_words for w in ["vaccine", "vaccination", "immune", "antibody"]):
             label = "Vaccines and Immunology"
         elif any(w in cluster_words for w in ["trial", "treatment", "therapy", "drug"]):
             label = "Treatment and Clinical Trials"
